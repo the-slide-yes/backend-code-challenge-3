@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "node_modules/@types/express";
 import { Task } from "../models/taskModel";
-import * as taskService from "../services/taskService";
+import * as taskService from "../service/taskService";
 import { HTTP_STATUS } from "src/constants/httpConstants";
 import { successResponse } from "../models/responseModel";
 

@@ -13,7 +13,7 @@ export const createTask = async (taskData: {
             title: string;
             priority: "low" | "medium" | "high";
             status: "open" | "in-progress" | "completed";
-            dueDat: Date;
+            dueDate: Date;
             }): Promise<Task> => {
                 try {
                     const dateNow = new Date();
