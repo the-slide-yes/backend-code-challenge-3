@@ -1,4 +1,4 @@
-import { Router } from "node_modules/@types/express";
+import { Router } from "express";
 import * as taskController from "../controllers/taskController";
 import { validateRequest } from "../middleware/validate";
 import { taskSchemas } from "../validations/taskValidation";
