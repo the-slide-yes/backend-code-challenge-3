@@ -4,12 +4,13 @@ import { Task } from "src/api/v1/models/taskModel";
 
 jest.mock("../src/api/v1/repositories/firestoreRepository");
 
-describe("Item Service", () => {
+describe("Task Service", () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
     it("should create an item successfully", async () => {
+        // Arrange
         const mockTaskData: {
             userId: string;
             title: string;
@@ -21,6 +22,29 @@ describe("Item Service", () => {
             title: "Test Title",
             priority: "medium",
             status: "open",
-            dueDate: 01/20/2000,
-        }
-    })
+            dueDate: new Date(),
+        };
+
+        const mockDocumentId: string = "test-task-ID";
+
+        (firestoreRepository.createDocument as jest.Mock).mockResolvedValue(mockDocumentId);
+
+        // Act
+        const result: Task = await TaskService.createTask(mockTaskData);
+
+        // Assert
+        expect(firestoreRepository.createDocument).toHaveBeenCalledWith("tasks", expect.objectContaining({
+            userId: mockTaskData.userId,
+            title: mockTaskData.title,
+            priority: mockTaskData.priority,
+            status: mockTaskData.status,
+            dueDate: mockTaskData.dueDate,
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
+        }));
+
+        expect(result.id).toBe(mockDocumentId);
+        expect(result.userId).toBe(mockTaskData.userId);
+    });
+
+});
