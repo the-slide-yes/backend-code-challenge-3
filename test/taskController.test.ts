@@ -3,7 +3,7 @@ import { Task } from "src/api/v1/models/taskModel";
 import * as taskController from "../src/api/v1/controllers/taskController";
 import * as taskService from "../src/api/v1/service/taskService";
 import { mock } from "node:test";
-import { HTTP_STATUS } from "src/constants/httpConstants";
+import { HTTP_STATUS } from "../src/constants/httpConstants";
 
 jest.mock("../src/api/v1/service/taskService");
 
@@ -50,8 +50,8 @@ describe("Task controller", () => {
             // Assert
             expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.CREATED);
             expect(mockRes.json).toHaveBeenCalledWith({
-                message: "task created successfully",
-                date: mockTask,
+                message: "Task created successfully",
+                data: mockTask,
                 status: "success"
             });
         });
